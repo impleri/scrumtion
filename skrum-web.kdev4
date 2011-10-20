@@ -1,0 +1,4 @@
+[Project]
+Name=skrum-web
+Manager=KDevGenericManager
+VersionControl=kdevgit
