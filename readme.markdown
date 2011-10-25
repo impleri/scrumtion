@@ -16,25 +16,29 @@ Planned Features
 Database Design
 ---------------
 **comments**
+
  + id (key)
- + object_type (stories, projects, sprints, tasks)
- + object_id
+ + meta_key [*stories*, *projects*, *sprints*, *tasks*]
+ + meta_value ({meta_key}.id) 
 
 
 **organisations**
+
  + id (key)
  + name
  + description
 
 
 **organisations_members**
- + organisation_id /->organisations
- + user_id /->users
+
+ + organisation_id [*organisations.id*]
+ + user_id [*users.id*]
  + position
  + {unique key organisation_id, user_id}
 
 
 **projects**
+
  + id (key)
  + name
  + description
@@ -42,60 +46,67 @@ Database Design
  + point_scale
  + velocity_method
  + max_points
- + organisation /->organisations
+ + organisation [*organisations.id*]
 
 
 **projects_members**
- + project_id /->projects
- + user_id /->users
+
+ + project_id [*projects.id*]
+ + user_id [*users.id*]
  + position
  + {unique key project_id, user_id}
 
 
 **sprints**
+
  + id (key)
  + name
  + description
- + project /->projects
+ + project [*projects.id*]
 
 
 **stories**
+
  + id (key)
  + name
  + description
- + creator /->users
- + project /->projects
+ + creator [*users.id*]
+ + project [*projects.id*]
 
 
 **tags**
+
  + id (key)
  + name
  + description
 
 
 **tags_meta**
- + tag_id /->tags
- + meta_key (stories/->stories, tasks/->tasks)
+
+ + tag_id [*tags.id*]
+ + meta_key [*stories*, *tasks*]
  + meta_value ({meta_key}.id)
 
 
 **tasks**
+
  + id (key)
  + name
  + description
  + priority
  + points
- + project /->projects
- + story /->stories
- + sprint /-> sprints
- + creator /->users
- + owner /->users
+ + project [*projects.id*]
+ + story [*stories.id*]
+ + sprint [*sprints.id*]
+ + creator [*users.id*]
+ + owner [*users.id*]
  + start
  + review
  + complete
 
 
 **users**
+
  + id (key)
  + login
  + password
